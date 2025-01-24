@@ -48,7 +48,7 @@ public class ProductServiceImpl implements ProductService {
     }
     @Transactional
     @Override
-    public Product insert(ProductDetails productDetails) {
+    public ProductDetails insert(ProductDetails productDetails) {
         try {
             System.out.println("hello from try in service");
             return productDAO.insert(productDetails);
@@ -61,7 +61,7 @@ public class ProductServiceImpl implements ProductService {
     }
     @Transactional
     @Override
-    public ProductDetails findById(int id) {
+    public Product findById(int id) {
         try {
             System.out.println("hello from try in  findById service");
             return productDAO.findById(id);
@@ -75,17 +75,18 @@ public class ProductServiceImpl implements ProductService {
     }
     @Transactional
     @Override
-    public ProductDetails update(ProductDetails productDetails) {
+    public void update(ProductDetails productDetails) {
         try {
             System.out.println("hello from update in service");
-            System.out.println(productDetails);//done
-            return productDAO.update(productDetails);
+            productDAO.update(productDetails);
+           // System.out.println(productDetails);//done
+            //return productDAO.update(productDetails);
         }catch (Exception exception)
         {
             System.out.println("hello from catch update in service");
             exception.printStackTrace();
         }
-        return null;
+        //return null;
     }
 
 
@@ -99,6 +100,21 @@ public class ProductServiceImpl implements ProductService {
         }catch (Exception exception)
         {
             System.out.println("hello from catch in findByProductId service");
+            exception.printStackTrace();
+        }
+        return null;
+    }
+    @Transactional
+    public List<Product> findByName(String c) {
+        try {
+            System.out.println("hello from search service try");
+
+            return productDAO.findByName(c);
+
+        }catch (Exception exception)
+        {
+            System.out.println("hello from search service catch");
+
             exception.printStackTrace();
         }
         return null;

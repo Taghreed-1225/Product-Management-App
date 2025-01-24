@@ -18,6 +18,8 @@
   </properties>
 
   <dependencies>
+
+
     <!--    spring dependencies-->
 
     <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
@@ -132,6 +134,10 @@
       <version>4.13.2</version>
       <scope>test</scope>
     </dependency>
+
+
+
+
   </dependencies>
   <build>
     <finalName>SpringMvcCrudApp</finalName>

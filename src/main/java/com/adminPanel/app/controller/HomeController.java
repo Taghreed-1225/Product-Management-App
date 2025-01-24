@@ -6,6 +6,7 @@ import com.adminPanel.app.model.ProductDetails;
 import com.adminPanel.app.service.ProductService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -23,8 +26,7 @@ public class HomeController
 {
  @Autowired
  private ProductService productService;
-   // @Autowired
-// private ProductDAO productDAO;
+
     @RequestMapping("/")
     public String homePage(Model productModel)throws ParseException
     {
@@ -42,9 +44,9 @@ public class HomeController
     }
 
  @RequestMapping("/deleteProduct")
- public String deleteProduct( @RequestParam("productId") int productId)
+ public String deleteProduct( @RequestParam("Id") int theId)
  {
-  productService.deleteById(productId);
+  productService.deleteById(theId);
 
 
 
@@ -102,7 +104,7 @@ public class HomeController
   ProductDetails productDetails =productService.findByProductId(productId);
 
   model.addAttribute("productDetails",  productDetails);
-  System.out.println("end of controller update  .. "+productDetails);
+  System.out.println("end of controller update  .. "+productDetails.getName()+productDetails.getId()+productDetails.getManufacturer());
 
 
   return "updatePage";
@@ -121,7 +123,30 @@ public class HomeController
 
   return "redirect:/";
  }
+ @GetMapping("/apiTest")
+ //@ResponseBody
+ public String testAPi()
+ {
+  return "HelloFromJSON";
+ }
 
+ //this initBinder will be used to format the date from the backend to the frontend to show
+ // the expiration date in update form by this format dd/mm/yyyy
+// @InitBinder
+// public void initBinder(WebDataBinder binder) {
+//  SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+//  binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+// }
 
+ @GetMapping("/searchProduct")
+ public String searchProducts(@RequestParam("searchKey") String searchKey , Model productModel)
+ {
+  System.out.println("hello from search");
+  System.out.println(searchKey);
+  List<Product> productList = productService.findByName(searchKey);
+  productModel.addAttribute("productList" , productList);
+  System.out.println("list = "+productList);
+  return "homePage";
+ }
 
 }

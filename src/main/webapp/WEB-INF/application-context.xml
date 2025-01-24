@@ -51,7 +51,7 @@
                 <prop key="hbm2ddl.aut">update</prop>
 
                 <!--                to enable lazy loading with the transaction management-->
-<!--                <prop key="hibernate.enable_lazy_load_no_trans">true</prop>-->
+                <prop key="hibernate.enable_lazy_load_no_trans">true</prop>
 
             </props>
         </property>

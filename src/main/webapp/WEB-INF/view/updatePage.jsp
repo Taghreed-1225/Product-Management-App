@@ -35,8 +35,12 @@
              <br><br>
               <br><br>
                 <h4>available</h4>
-                <form:input type="number" placeholder="0 or 1" path="available" class="form-control"/>
-                <br><br>
+
+                               <form:select path="available" class="form-control">
+                                   <form:option value="true" label="Yes" />
+                                   <form:option value="false" label="No" />
+                               </form:select>
+                               <br><br>
    <!-- Button to delete the product -->
 
          <button type="submit" class="btn btn-danger">submit</button>

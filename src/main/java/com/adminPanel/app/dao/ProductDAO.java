@@ -6,10 +6,14 @@ import com.adminPanel.app.model.ProductDetails;
 import java.util.List;
 
 public interface ProductDAO {
-    Product insert(ProductDetails productDetails);
+    ProductDetails insert(ProductDetails productDetails);
     void deleteById(int id);
     public List<Product> getAllProducts();
-    ProductDetails findById(int id);
-    ProductDetails update(ProductDetails productDetails);
+
+
+    Product findById(int pid);
+
+    void update(ProductDetails productDetails);
     ProductDetails findByProductId(int id);
+    List<Product>findByName(String c);
 }

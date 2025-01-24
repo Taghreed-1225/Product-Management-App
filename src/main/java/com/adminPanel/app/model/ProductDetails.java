@@ -1,5 +1,6 @@
 package com.adminPanel.app.model;
 
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,7 +17,7 @@ import java.util.Date;
 @Setter
 @Getter
 @NoArgsConstructor
-@ToString
+
 public class ProductDetails {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -48,10 +49,23 @@ public class ProductDetails {
     @Column(name="expiration_date")
     private Date expirationDate;
 
-    //@OneToOne(cascade = CascadeType.ALL)
-  //  @JoinColumn(name="product_id")
-    @Column(name="product_id")
-    private int productId;
+//    @OneToOne(cascade = CascadeType.ALL)
+//   @JoinColumn(name="product_id")
+//    //@Column(name="product_id")
+//    private int productId;
+
+
+// to make relation unidirectional
+@OneToOne(mappedBy = "productDetailsId" ,cascade = CascadeType.ALL)
+    private Product product;
+
+
+
+
+    public void setAvailable(@NotNull(message = "is required") boolean available) {
+        this.available = available;
+    }
+
 
     public void set(ProductDetails productDetails)
     {
@@ -65,4 +79,6 @@ public class ProductDetails {
 
 
     }
+
+
 }

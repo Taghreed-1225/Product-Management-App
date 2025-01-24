@@ -2,6 +2,7 @@ package com.adminPanel.app.model;
 
 
 
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,7 +17,7 @@ import javax.validation.constraints.NotEmpty;
 @Setter
 @Getter
 @NoArgsConstructor
-@ToString
+
 public class Product {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -28,11 +29,26 @@ public class Product {
     @Column(name="name")
     private String name;
 
-//    @OneToOne
-//    @JoinColumn(name="product_details_id")
-//    private ProductDetails productDetailsId;
+    @OneToOne(cascade = CascadeType.ALL , fetch = FetchType.LAZY)
+   @JoinColumn(name="product_details_id")
+    private ProductDetails productDetailsId;
+
+
+//@JsonIgnore
+//@OneToOne(cascade = CascadeType.ALL  )
+//@JoinColumn(name = "product_details_id")
+//private ProductDetails productDetails;productDetails
 
     public Product(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", productDetailsId=" + productDetailsId +
+                '}';
     }
 }
